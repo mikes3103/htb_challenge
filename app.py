@@ -9,6 +9,8 @@ def index():
 
 @app.route('/rate', methods=['POST'])
 def rate():
+    if request.method == "POST":
+        print("POST at /rate")
     #rate = request.get_json()#['rate']
     cdr = request.form
 
@@ -16,7 +18,8 @@ def rate():
     #print(rate)
     #energy_consumed = cdr["meterStart"] - crd["meterStop"]
 
-    return output( 1,2,3,4)
+    output_dict = output(1,2,3,4)
+    return output_dict
 
 def output(overall, energy, time, transaction):
     return {
