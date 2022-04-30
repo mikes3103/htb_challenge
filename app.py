@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 import datetime
 
 app = Flask(__name__)
@@ -11,15 +11,24 @@ def index():
 def rate():
     if request.method == "POST":
         print("POST at /rate")
-    #rate = request.get_json()#['rate']
-    cdr = request.form
+        
+        #rate
+        energy = request.form.get("rate[energy]")
+        time = request.form.get("rate[time]")
+        transaction = float(request.form.get("rate[transaction]"))
 
-    print(cdr)
-    #print(rate)
-    #energy_consumed = cdr["meterStart"] - crd["meterStop"]
+        #cdr
+        meterStart = request.form.get("cdr[meterStart]")
+        timestampStart = request.form.get("cdr[timestampStart]")
+        meterStop = request.form.get("cdr[meterStop]")
+        timestampStop = request.form.get("cdr[timestampStop]")
 
-    output_dict = output(1,2,3,4)
-    return output_dict
+        overall = transaction
+
+        output_dict = output(overall,2,3,transaction)
+        return output_dict
+
+    abort(400)
 
 def output(overall, energy, time, transaction):
     return {
