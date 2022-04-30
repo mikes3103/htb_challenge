@@ -13,8 +13,8 @@ def rate():
         print("POST at /rate")
         
         #rate
-        energy = request.form.get("rate[energy]")
-        time = request.form.get("rate[time]")
+        energy = float(request.form.get("rate[energy]"))
+        time = float(request.form.get("rate[time]"))
         transaction = float(request.form.get("rate[transaction]"))
 
         #cdr
