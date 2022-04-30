@@ -5,30 +5,25 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-  return render_template("index.html")
+    return render_template("index.html")
 
 @app.route('/rate', methods=['POST'])
 def rate():
-    energy = request.form['energy']
-    time = request.form['time']
-    transaction = request.form['transaction']
+    #rate = request.get_json()#['rate']
+    cdr = request.form
 
-    meterStart = request.form['meterStart']
-    timestampStart = request.form['timestampStart']
-    meterStop = request.form['meterStop']
-    timestampStop = request.form['timestampStop']
-    
-    timestampStart = datetime.datetime.now()
-    timestampStop = datetime.datetime.now()
+    print(cdr)
+    #print(rate)
+    #energy_consumed = cdr["meterStart"] - crd["meterStop"]
 
-    return_dict = {
-        "overall": energy,
-        "components": {
-            "energy": "444",
-            "time": "555",
-            "transaction": "666",
-        }
-    }
+    return output( 1,2,3,4)
 
-    return return_dict
+def output(overall, energy, time, transaction):
+    return {
+        "overall" : overall,
+        "components" : {
+            "energy" : energy,
+            "time" : time,
+            "transaction" : transaction
+        }}
   
